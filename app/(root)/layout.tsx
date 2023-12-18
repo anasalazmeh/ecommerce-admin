@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import prisma from "@/prisma/client";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -9,7 +10,12 @@ const SetupLayout = async ({ children }: PropsWithChildren) => {
     where: { userId },
   });
   if (store) redirect(`/${store.id}`);
-  return <div>{children }</div>;
+  return (
+    <div>
+      <Navbar />
+      {children}
+    </div>
+  );
 };
 
 export default SetupLayout;

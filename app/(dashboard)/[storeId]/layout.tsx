@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import prisma from "@/prisma/client";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -16,10 +17,12 @@ const DashboardLayout = async ({ children, params }: Props) => {
     },
   });
   if (!store) redirect("/");
-  return <>
-  <div>the Anas Alazmeh Navber</div>
-  {children}
-  </>;
+  return (
+    <>
+      <div><Navbar/></div>
+      {children}
+    </>
+  );
 };
 
 export default DashboardLayout;
