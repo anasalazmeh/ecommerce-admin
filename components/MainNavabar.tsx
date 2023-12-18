@@ -13,6 +13,11 @@ const MainNavabar = ({className}:{className?:string}) => {
       href: `/${parmas.storeId}/setting`,
       active: pathName == `/${parmas.storeId}/setting`,
     },
+    {
+      label: "Overview",
+      href: `/${parmas.storeId}/Overview`,
+      active: pathName == `/${parmas.storeId}/Overview`,
+    },
   ];
   return (
     <nav className={cn("flex items-center space-x-4 lg:space-x-6",className)}>
