@@ -1,3 +1,4 @@
+import AlertModal from "@/components/modals/alert-modal";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -6,15 +7,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import axios from "axios";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { useState } from "react";
-import axios from "axios";
-import AlertModal from "@/components/modals/alert-modal";
-import { CategoryColumn } from "./columns";
+import toast from "react-hot-toast";
+import { ColorColumn } from "./columns";
 interface CellActionProps {
-  data: CategoryColumn;
+  data: ColorColumn;
 }
 const CellAction = ({ data }: CellActionProps) => {
   const router = useRouter();
@@ -23,19 +23,17 @@ const CellAction = ({ data }: CellActionProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const onCopy = () => {
     navigator.clipboard.writeText(data.id);
-    toast.success("Billboard id copied to the clip");
+    toast.success("Color id copied to the clip");
   };
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/categories/${data.id}`
-      );
-      router.push(`/${params.storeId}/categories`);
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
+      router.push(`/${params.storeId}/colors`);
       router.refresh();
-      toast.success("Category Delete.");
+      toast.success("Color Delete.");
     } catch (error) {
-      toast.error("Make sure you  removed all products and categories first.");
+      toast.error("Make sure you  removed all products and colors first.");
     } finally {
       setIsLoading(false);
       setIsOpen(false);
@@ -43,7 +41,12 @@ const CellAction = ({ data }: CellActionProps) => {
   };
   return (
     <>
-      <AlertModal isOpen={isOpem} onClose={()=>setIsOpen(false)} loading={isLoading} onConfirm={onDelete}/>
+      <AlertModal
+        isOpen={isOpem}
+        onClose={() => setIsOpen(false)}
+        loading={isLoading}
+        onConfirm={onDelete}
+      />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="w-8 h-8 p-0">
@@ -58,14 +61,12 @@ const CellAction = ({ data }: CellActionProps) => {
             Copy id
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() =>
-              router.push(`/${params.storeId}/categories/${data.id}`)
-            }
+            onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" />
             Update
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={()=>setIsOpen(true)}>
+          <DropdownMenuItem onClick={() => setIsOpen(true)}>
             <Trash className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>

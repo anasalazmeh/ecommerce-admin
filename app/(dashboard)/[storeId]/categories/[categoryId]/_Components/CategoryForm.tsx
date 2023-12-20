@@ -46,10 +46,10 @@ const CategoryForm = ({
 }) => {
   const form = useForm<CategoryFormValue>({
     resolver: zodResolver(formShema),
-    // defaultValues: initialData || {
-    //   label: "",
-    //   imageUrl: "",
-    // },
+    defaultValues: initialData || {
+      name: "",
+      billboardId: "",
+    },
   });
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,11 +66,11 @@ const CategoryForm = ({
       setIsLoading(true);
       initialData
         ? await axios.patch(
-            `/api/${params.storeId}/billboard/${params.billboardId}`,
+            `/api/${params.storeId}/categories/${params.categoryId}`,
             data
           )
-        : await axios.post(`/api/${params.storeId}/billboard`, data);
-      route.push(`/${params.storeId}/billboards`);
+        : await axios.post(`/api/${params.storeId}/categories`, data);
+      route.push(`/${params.storeId}/categories`);
       route.refresh();
       toast.success(toastMessage);
     } catch (error) {
@@ -85,11 +85,11 @@ const CategoryForm = ({
     try {
       setIsLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/billboard/${params.billboardId}`
+        `/api/${params.storeId}/categories/${params.categoryId}`
       );
-      route.push(`/${params.storeId}/billboards`);
+      route.push(`/${params.storeId}/categories`);
       route.refresh();
-      toast.success("Billboard Delete.");
+      toast.success("ategory Delete.");
     } catch (error) {
       toast.error("Make sure you  removed all products and categories first.");
     } finally {
@@ -168,11 +168,7 @@ const CategoryForm = ({
                       {billboards.map((item) => (
                         <SelectItem key={item.id} value={item.id}>
                           {item.label}
-                          {initialData?.billboardId === item.id ? (
-                            <Check className="mr-2 h-4 w-4" />
-                          ) : (
-                            ""
-                          )}
+                          
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -188,11 +184,6 @@ const CategoryForm = ({
         </form>
       </Form>
       <Separator />
-      <ApiAlert
-        title="NEXT_PUBLIC_API_URL"
-        description={`${origin}/api/${params.storeId}`}
-        variant="public"
-      />
     </>
   );
 };

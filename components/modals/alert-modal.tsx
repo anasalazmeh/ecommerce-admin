@@ -15,7 +15,7 @@ const AlertModal = ({isOpen,onClose,onConfirm,loading}:AlertModalProps) => {
   if(!isMount) return null
   return (
     <Modal
-     title='Are you sure?.'
+     title='Are you sure ?'
      description='This action be undone.'
      isOpen={isOpen}
      onClose={onClose}

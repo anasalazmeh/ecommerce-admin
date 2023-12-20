@@ -17,14 +17,14 @@ export async function GET(
     });
     if (!store)
       return new NextResponse("store id is required", { status: 400 });
-    const category = await prisma.category.findMany({
+    const size = await prisma.size.findMany({
       where: {storeId: store.id },
     });
-    if (!category)
-      return new NextResponse("Category id is required", { status: 400 });
-    return NextResponse.json(category, { status: 200 });
+    if (!size)
+      return new NextResponse("Size id is required", { status: 400 });
+    return NextResponse.json(size, { status: 200 });
   } catch (error) {
-    console.error("[GIT Category]", error);
+    console.error("[GIT size]", error);
     return new NextResponse("Interal error", { status: 500 });
   }
 }
@@ -36,27 +36,28 @@ export async function POST(
     const { userId } = auth();
     const body = await request.json();
 
-    const { name, billboardId } = body;
+    const { name, value } = body;
 
     if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
     if (!name) return new NextResponse("Name is required", { status: 400 });
+    if (!value) return new NextResponse("Value is required", { status: 400 });
 
     const store = await prisma.store.findFirst({
       where: { id: params.storeId, userId },
     });
     if (!store)
       return new NextResponse("store id is required", { status: 400 });
-    const category = await prisma.category.create({
+    const size = await prisma.size.create({
       data: {
         name,
         storeId: params.storeId,
-        billboardId,
+        value,
       },
     });
-    return NextResponse.json(category);
+    return NextResponse.json(size);
   } catch (error) {
-    console.error("[post category]", error);
+    console.error("[post size]", error);
     return new NextResponse("Interal error", { status: 500 });
   }
 }

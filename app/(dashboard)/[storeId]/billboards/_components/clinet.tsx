@@ -20,7 +20,7 @@ const BillboardsClient =  ({data}:BillboardsClientProps) => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Billboard (${data.length})`}
+          title={`Billboards (${data.length})`}
           description="manage billboards for your store "
         />
         <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
