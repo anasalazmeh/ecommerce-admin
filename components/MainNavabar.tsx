@@ -19,6 +19,11 @@ const MainNavabar = ({className}:{className?:string}) => {
       active: pathName == `/${parmas.storeId}/billboards`,
     },
     {
+      label: "Categories",
+      href: `/${parmas.storeId}/categories`,
+      active: pathName == `/${parmas.storeId}/categories`,
+    },
+    {
       label: "Setting",
       href: `/${parmas.storeId}/setting`,
       active: pathName == `/${parmas.storeId}/setting`,

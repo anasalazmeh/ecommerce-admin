@@ -4,6 +4,9 @@ import BillboardsClient from "./_components/clinet";
 const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
   const billboards = await prisma.billboards.findMany({
     where: { storeId: params.storeId },
+    orderBy:{
+      createdAt:'desc'
+    }
   });
   const data=billboards.map(item=>({
     id:item.id,
