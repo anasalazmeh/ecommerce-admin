@@ -28,7 +28,7 @@ const ApiAlert = ({
     toast.success("API Route copied to the clip")
   }
   return (
-    <Alert>
+    <Alert className="my-3">
       <Server className="h-4 w-4" />
       <AlertTitle className="flex items-center gap-x-2">
         {title}

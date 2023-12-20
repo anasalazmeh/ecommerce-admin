@@ -9,14 +9,19 @@ const MainNavabar = ({className}:{className?:string}) => {
   const pathName = usePathname();
   const routes: { href: string; label: string; active: boolean }[] = [
     {
+      label: "Overview",
+      href: `/${parmas.storeId}/overview`,
+      active: pathName == `/${parmas.storeId}/overview`,
+    },
+    {
+      label: "Billboards",
+      href: `/${parmas.storeId}/billboards`,
+      active: pathName == `/${parmas.storeId}/billboards`,
+    },
+    {
       label: "Setting",
       href: `/${parmas.storeId}/setting`,
       active: pathName == `/${parmas.storeId}/setting`,
-    },
-    {
-      label: "Overview",
-      href: `/${parmas.storeId}/Overview`,
-      active: pathName == `/${parmas.storeId}/Overview`,
     },
   ];
   return (

@@ -25,7 +25,7 @@ const AlertModal = ({isOpen,onClose,onConfirm,loading}:AlertModalProps) => {
           Cancel
         </Button>
         <Button variant={'destructive'} disabled={loading} onClick={onConfirm}>
-          Contiuns
+          Contiuns{loading && "..."}
         </Button>
       </div>
     </Modal>
