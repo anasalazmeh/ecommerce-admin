@@ -85,6 +85,28 @@ CREATE TABLE "Image" (
     CONSTRAINT "Image_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Order" (
+    "id" STRING NOT NULL,
+    "storeId" STRING NOT NULL,
+    "isPaid" BOOL NOT NULL DEFAULT false,
+    "phone" STRING NOT NULL DEFAULT '',
+    "address" STRING NOT NULL DEFAULT '',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "OrderItem" (
+    "id" STRING NOT NULL,
+    "orderId" STRING NOT NULL,
+    "productId" STRING NOT NULL,
+
+    CONSTRAINT "OrderItem_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE INDEX "Billboards_storeId_idx" ON "Billboards"("storeId");
 
@@ -114,3 +136,12 @@ CREATE INDEX "Product_colorId_idx" ON "Product"("colorId");
 
 -- CreateIndex
 CREATE INDEX "Image_productId_idx" ON "Image"("productId");
+
+-- CreateIndex
+CREATE INDEX "Order_storeId_idx" ON "Order"("storeId");
+
+-- CreateIndex
+CREATE INDEX "OrderItem_orderId_idx" ON "OrderItem"("orderId");
+
+-- CreateIndex
+CREATE INDEX "OrderItem_productId_idx" ON "OrderItem"("productId");
