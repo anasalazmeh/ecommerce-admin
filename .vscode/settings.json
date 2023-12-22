@@ -1,0 +1,20 @@
+{
+  "sqltools.connections": [
+    {
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": false
+        }
+      },
+      "previewLimit": 50,
+      "server": "crafty-frog-12911.7tt.cockroachlabs.cloud",
+      "port": 26257,
+      "driver": "CockroachDB",
+      "name": "Cockroach",
+      "username": "anoosalazmeh",
+      "password": "Lx-6gV3FiJdmmv9TZ1XHRA",
+      "connectionTimeout": 15,
+      "database": "EcommerceAdmin"
+    }
+  ]
+}

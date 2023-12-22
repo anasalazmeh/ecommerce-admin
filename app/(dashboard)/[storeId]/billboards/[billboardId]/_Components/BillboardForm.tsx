@@ -36,7 +36,7 @@ const BillboardForm = ({ initialData }: { initialData: Billboards | null }) => {
     resolver: zodResolver(formShema),
     defaultValues: initialData || {
       label: "",
-      imageUrl:""
+      imageUrl: "",
     },
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -48,16 +48,17 @@ const BillboardForm = ({ initialData }: { initialData: Billboards | null }) => {
   const description = initialData ? "Edit billboard" : "Add a new billboard";
   const toastMessage = initialData ? "billboard update" : "billboard create";
   const actiov = initialData ? "save changes" : "Create";
-  
 
   const onSubmit = async (data: BillboardFormValue) => {
     try {
       setIsLoading(true);
-      (initialData?
-      await axios.patch(`/api/${params.storeId}/billboard/${params.billboardId}`, data)
-      :
-      await axios.post(`/api/${params.storeId}/billboard`, data))
-      route.push(`/${params.storeId}/billboards`)
+      initialData
+        ? await axios.patch(
+            `/api/${params.storeId}/billboard/${params.billboardId}`,
+            data
+          )
+        : await axios.post(`/api/${params.storeId}/billboard`, data);
+      route.push(`/${params.storeId}/billboards`);
       route.refresh();
       toast.success(toastMessage);
     } catch (error) {
@@ -71,8 +72,10 @@ const BillboardForm = ({ initialData }: { initialData: Billboards | null }) => {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboard/${params.billboardId}`)
-      route.push(`/${params.storeId}/billboards`)
+      await axios.delete(
+        `/api/${params.storeId}/billboard/${params.billboardId}`
+      );
+      route.push(`/${params.storeId}/billboards`);
       route.refresh();
       toast.success("Billboard Delete.");
     } catch (error) {
@@ -118,10 +121,11 @@ const BillboardForm = ({ initialData }: { initialData: Billboards | null }) => {
                 <FormLabel>background image</FormLabel>
                 <FormControl>
                   <ImageUpload
-                    value={field.value?[field.value]:[]}
-                    disabed={isLoading}
+                    value={field.value ? [field.value] : []}
+                    disabled={isLoading}
                     onChange={(url) => field.onChange(url)}
-                    onRemove={()=>field.onChange("")}
+                    onRemove={() => field.onChange("")}
+                    loading={isLoading}
                   />
                 </FormControl>
                 <FormMessage />

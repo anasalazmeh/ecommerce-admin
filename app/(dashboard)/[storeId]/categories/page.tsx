@@ -2,9 +2,9 @@ import prisma from "@/prisma/client";
 import BillboardsClient from "./_components/clinet";
 import { CategoryColumn } from "./_components/columns";
 
-const CategoiesPage = async ({ params }: { params: { categoryId: string } }) => {
+const CategoiesPage = async ({ params }: { params: { storeId: string } }) => {
   const categoies = await prisma.category.findMany({
-    where: { storeId: params.categoryId },
+    where: { storeId: params.storeId },
     include: {
       billboard: true,
     },

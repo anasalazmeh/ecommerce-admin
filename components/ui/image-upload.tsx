@@ -6,13 +6,14 @@ import { ImagePlus, Train } from "lucide-react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
 interface ImageUploadPros {
-  disabed: boolean;
+  disabled: boolean;
   onChange: (value: string) => void;
   onRemove: (value: string) => void;
   value: string[];
+  loading: boolean;
 }
 const ImageUpload = ({
-  disabed,
+  disabled,
   onChange,
   onRemove,
   value,
@@ -39,6 +40,7 @@ const ImageUpload = ({
                 onClick={() => onRemove(url)}
                 variant={"destructive"}
                 size="icon"
+                disabled={disabled}
               >
                 <Train className="w-4 h-4" />
               </Button>
@@ -56,13 +58,12 @@ const ImageUpload = ({
             <Button
               type="button"
               variant="secondary"
-              disabled={disabed}
+              disabled={disabled}
               onClick={onClick}
             >
               <ImagePlus className="w-4 h-4 mr-2" />
               Upload an Image
             </Button>
-
           );
         }}
       </CldUploadWidget>

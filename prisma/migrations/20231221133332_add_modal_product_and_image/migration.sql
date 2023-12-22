@@ -64,7 +64,7 @@ CREATE TABLE "Product" (
     "categoryId" STRING NOT NULL,
     "name" STRING NOT NULL,
     "price" DECIMAL(65,30) NOT NULL,
-    "isFeatrued" BOOL NOT NULL DEFAULT false,
+    "isFeatured" BOOL NOT NULL DEFAULT false,
     "isArchived" BOOL NOT NULL DEFAULT false,
     "sizeId" STRING NOT NULL,
     "colorId" STRING NOT NULL,
@@ -77,8 +77,8 @@ CREATE TABLE "Product" (
 -- CreateTable
 CREATE TABLE "Image" (
     "id" STRING NOT NULL,
-    "url" STRING NOT NULL,
     "productId" STRING NOT NULL,
+    "url" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

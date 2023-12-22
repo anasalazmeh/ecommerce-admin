@@ -1,5 +1,6 @@
 "use client";
 import AlertModal from "@/components/modals/alert-modal";
+import SelectModal from "@/components/modals/select-modal";
 import Heading from "@/components/ui/Heading";
 import ApiAlert from "@/components/ui/api-alert";
 import { Button } from "@/components/ui/button";
@@ -150,29 +151,13 @@ const CategoryForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>billboard</FormLabel>
-                  <Select
-                    disabled={isLoading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a billboard"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {billboards.map((item) => (
-                        <SelectItem key={item.id} value={item.id}>
-                          {item.label}
-                          
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <SelectModal
+                  loading={isLoading}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  data={billboards}
+                  placeholder="Select a billboard"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
