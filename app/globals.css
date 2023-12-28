@@ -74,3 +74,26 @@
     @apply bg-background text-foreground;
   }
 }
+.loading{
+  transform: translateX(-50px);
+  animation-name: loadingbutton;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  /* animation-timing-function: ease-in; */
+  animation-fill-mode:backwards;
+  transition: all;
+}
+@keyframes loadingbutton{
+  0%{
+    transform: translateX(-40px);
+    
+  }
+  50%{
+    transform: translateX(40px);
+   
+  }
+  100%{
+    transform: translateX(-40px);
+    
+  }
+}

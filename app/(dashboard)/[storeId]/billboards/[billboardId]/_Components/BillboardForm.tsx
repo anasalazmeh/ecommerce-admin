@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/form";
 import ImageUpload from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loadingButton";
 import { Separator } from "@/components/ui/separator";
 import { useOrigin } from "@/hooks/use-origin";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,17 +48,17 @@ const BillboardForm = ({ initialData }: { initialData: Billboards | null }) => {
   const title = initialData ? "Edit billboard" : "Create billboard";
   const description = initialData ? "Edit billboard" : "Add a new billboard";
   const toastMessage = initialData ? "billboard update" : "billboard create";
-  const actiov = initialData ? "save changes" : "Create";
+  const action = initialData ? "save changes" : "Create";
 
   const onSubmit = async (data: BillboardFormValue) => {
     try {
       setIsLoading(true);
       initialData
         ? await axios.patch(
-            `/api/${params.storeId}/billboard/${params.billboardId}`,
+            `/api/${params.storeId}/billboards/${params.billboardId}`,
             data
           )
-        : await axios.post(`/api/${params.storeId}/billboard`, data);
+        : await axios.post(`/api/${params.storeId}/billboards`, data);
       route.push(`/${params.storeId}/billboards`);
       route.refresh();
       toast.success(toastMessage);
@@ -152,9 +153,11 @@ const BillboardForm = ({ initialData }: { initialData: Billboards | null }) => {
               )}
             />
           </div>
+         
+          {isLoading?(<LoadingButton/>):(
           <Button disabled={isLoading} className="ml-auto" type="submit">
-            {actiov}
-          </Button>
+            {action}
+          </Button>)}
         </form>
       </Form>
       <Separator />

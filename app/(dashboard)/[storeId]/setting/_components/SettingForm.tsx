@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loadingButton";
 import { Separator } from "@/components/ui/separator";
 import { useOrigin } from "@/hooks/use-origin";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -110,9 +111,10 @@ const SettingForm = ({ initialData }: { initialData: Store }) => {
               )}
             />
           </div>
+          {isLoading?(<LoadingButton />):(
           <Button disabled={isLoading} className="ml-auto" type="submit">
             Save changes
-          </Button>
+          </Button>)}
         </form>
       </Form>
       <Separator/>

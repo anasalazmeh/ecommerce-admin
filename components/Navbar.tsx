@@ -4,6 +4,7 @@ import { UserButton, auth } from '@clerk/nextjs'
 import StoreSwichter from './StoreSwichter'
 import prisma from '@/prisma/client'
 import { redirect } from 'next/navigation'
+import { ModeToggle } from './theme-toggle'
 
 const Navbar =async () => {
   const {userId} =auth()
@@ -22,6 +23,7 @@ const Navbar =async () => {
         <MainNavabar  className='mx-6'/>
       </div>
       <div className='ml-auto flex items-center space-x-4'>
+        <ModeToggle/>
         <UserButton afterSignOutUrl='/'/>
       </div>
     </div>

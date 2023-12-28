@@ -29,7 +29,7 @@ const CellAction = ({ data }: CellActionProps) => {
     try {
       setIsLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/billboard/${data.id}`
+        `/api/${params.storeId}/billboards/${data.id}`
       );
       router.push(`/${params.storeId}/billboards`);
       router.refresh();

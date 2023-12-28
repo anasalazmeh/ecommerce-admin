@@ -31,7 +31,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
-
+import LoadingButton from "@/components/ui/loadingButton";
 const formShema = z.object({
   name: z.string().min(1),
   billboardId: z.string().min(1),
@@ -60,7 +60,7 @@ const CategoryForm = ({
   const title = initialData ? "Edit category" : "Create category";
   const description = initialData ? "Edit category" : "Add a new category";
   const toastMessage = initialData ? "Category update" : "Category create";
-  const actiov = initialData ? "save changes" : "Create";
+  const action = initialData ? "save changes" : "Create";
 
   const onSubmit = async (data: CategoryFormValue) => {
     try {
@@ -163,9 +163,10 @@ const CategoryForm = ({
               )}
             />
           </div>
+          {isLoading?(<LoadingButton />):(
           <Button disabled={isLoading} className="ml-auto" type="submit">
-            {actiov}
-          </Button>
+            {action}
+          </Button>)}
         </form>
       </Form>
       <Separator />

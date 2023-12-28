@@ -6,14 +6,14 @@ export async function GET(
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const { userId } = auth();
-    if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
+    // const { userId } = auth();
+    // if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
     if (!params.storeId)
       return NextResponse.json("Store id is required", { status: 400 });
 
     const store = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: params.storeId },
     });
     if (!store)
       return new NextResponse("store id is required", { status: 400 });

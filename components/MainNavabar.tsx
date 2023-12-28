@@ -10,7 +10,7 @@ const MainNavabar = ({className}:{className?:string}) => {
   const routes: { href: string; label: string; active: boolean }[] = [
     {
       label: "Overview",
-      href: `/${parmas.storeId}/overview`,
+      href: `/${parmas.storeId}`,
       active: pathName == `/${parmas.storeId}/overview`,
     },
     {
@@ -37,6 +37,11 @@ const MainNavabar = ({className}:{className?:string}) => {
       label: "Products",
       href: `/${parmas.storeId}/products`,
       active: pathName == `/${parmas.storeId}/products`,
+    },
+    {
+      label: "Order",
+      href: `/${parmas.storeId}/orders`,
+      active: pathName == `/${parmas.storeId}/orders`,
     },
     {
       label: "Setting",

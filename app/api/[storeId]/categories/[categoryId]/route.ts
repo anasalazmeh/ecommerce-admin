@@ -2,13 +2,13 @@ import prisma from "@/prisma/client";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-export async function GIT(
+export async function GET(
   request: Request,
   { params }: { params: { storeId: string; categoryId: string } }
 ) {
   try {
-    const { userId } = auth();
-    if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
+    // const { userId } = auth();
+    // if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
     if (!params.storeId)
       return NextResponse.json("Store id is required", { status: 400 });
@@ -17,12 +17,15 @@ export async function GIT(
       return NextResponse.json("Category Id is required", { status: 400 });
 
     const store = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: params.storeId },
     });
     if (!store)
       return new NextResponse("store id is required", { status: 400 });
     const category = await prisma.category.findFirst({
       where: { id: params.categoryId, storeId: store.id },
+      include:{
+        billboard:true
+      }
     });
     if (!category)
       return new NextResponse("Category id is required", { status: 400 });
@@ -39,14 +42,13 @@ export async function PATCH(
 ) {
   try {
     const { userId } = auth();
+    if (!userId) return NextResponse.json("Unauthenticated", { status: 401 });
+
     const body = await request.json();
     const { name, billboardId } = body;
 
-    if (!userId) return NextResponse.json("Unauthenticated", { status: 401 });
-
-    if (!name)
-      return NextResponse.json("name is required", { status: 400 });
-    if (billboardId)
+    if (!name) return NextResponse.json("name is required", { status: 400 });
+    if (!billboardId)
       return NextResponse.json("billboardId is required", { status: 400 });
     if (!params.storeId)
       return NextResponse.json("Store id is required", { status: 400 });
@@ -67,7 +69,7 @@ export async function PATCH(
       },
       data: {
         name,
-        billboardId
+        billboardId,
       },
     });
     return NextResponse.json(category);
@@ -87,14 +89,19 @@ export async function DELETE(
 
     if (!params.storeId)
       return NextResponse.json("store Id is required", { status: 400 });
-
+    const store = await prisma.store.findFirst({
+      where: { id: params.storeId },
+    });
+    if(!store)
+       return NextResponse.json("Store is required", { status: 400 });
+      
     if (!params.categoryId)
       return NextResponse.json("category Id is required", { status: 400 });
 
     const category = await prisma.category.delete({
       where: {
-        storeId: params.storeId,
         id: params.categoryId,
+        storeId: store?.id,
       },
     });
     return NextResponse.json(category);

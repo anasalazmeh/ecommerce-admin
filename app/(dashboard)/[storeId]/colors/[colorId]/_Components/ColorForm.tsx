@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loadingButton";
 import { Separator } from "@/components/ui/separator";
 import { useOrigin } from "@/hooks/use-origin";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,7 +48,7 @@ const ColorForm = ({ initialData }: { initialData: Color | null }) => {
   const title = initialData ? "Edit color" : "Create color";
   const description = initialData ? "Edit color" : "Add a new color";
   const toastMessage = initialData ? "Color update" : "Color create";
-  const actiov = initialData ? "save changes" : "Create";
+  const action = initialData ? "save changes" : "Create";
 
   const onSubmit = async (data: ColorFormValue) => {
     try {
@@ -158,9 +159,10 @@ const ColorForm = ({ initialData }: { initialData: Color | null }) => {
               )}
             />
           </div>
+          {isLoading?(<LoadingButton />):(
           <Button disabled={isLoading} className="ml-auto" type="submit">
-            {actiov}
-          </Button>
+            {action}
+          </Button>)}
         </form>
       </Form>
       <Separator />

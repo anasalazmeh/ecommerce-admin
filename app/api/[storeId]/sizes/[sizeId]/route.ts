@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-export async function GIT(
+export async function GET(
   request: Request,
   { params }: { params: { storeId: string; sizeId: string } }
 ) {

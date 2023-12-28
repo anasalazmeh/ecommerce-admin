@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loadingButton";
 import {
   Select,
   SelectValue,
@@ -54,7 +55,7 @@ const SizeForm = ({ initialData }: { initialData: Size | null }) => {
   const title = initialData ? "Edit size" : "Create size";
   const description = initialData ? "Edit size" : "Add a new size";
   const toastMessage = initialData ? "size update" : "size create";
-  const actiov = initialData ? "save changes" : "Create";
+  const action = initialData ? "save changes" : "Create";
 
   const onSubmit = async (data: SizeFormValue) => {
     try {
@@ -158,9 +159,10 @@ const SizeForm = ({ initialData }: { initialData: Size | null }) => {
               )}
             />
           </div>
+          {isLoading?(<LoadingButton />):(
           <Button disabled={isLoading} className="ml-auto" type="submit">
-            {actiov}
-          </Button>
+            {action}
+          </Button>)}
         </form>
       </Form>
       <Separator />

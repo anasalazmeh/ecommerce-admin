@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import ImageUpload from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loadingButton";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Category, Color, Image, Product, Size } from "@prisma/client";
@@ -303,9 +304,10 @@ const ProductsForm = ({
               )}
             />
           </div>
+          {loading?(<LoadingButton />):(
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}
-          </Button>
+          </Button>)}
         </form>
       </Form>
       <Separator />
