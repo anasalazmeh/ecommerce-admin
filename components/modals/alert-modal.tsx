@@ -19,7 +19,6 @@ const AlertModal = ({isOpen,onClose,onConfirm,loading}:AlertModalProps) => {
      description='This action be undone.'
      isOpen={isOpen}
      onClose={onClose}
-     loading={loading}
     >
       <div className='pt-6 space-x-2 flex justify-end items-center w-full'>
         <Button variant={'outline'} disabled={loading} onClick={onClose}>
