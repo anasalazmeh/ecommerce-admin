@@ -2,9 +2,9 @@ import prisma from "@/prisma/client";
 import BillboardsClient from "./_components/clinet";
 import { ColorColumn } from "./_components/columns";
 
-const ColorsPage = async ({ params }: { params: { sizeId: string } }) => {
+const ColorsPage = async ({ params }: { params: { storeId: string } }) => {
   const color = await prisma.color.findMany({
-    where: { storeId: params.sizeId },
+    where: { storeId: params.storeId },
     orderBy: {
       createdAt: "desc",
     },

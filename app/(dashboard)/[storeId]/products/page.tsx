@@ -3,9 +3,9 @@ import prisma from "@/prisma/client";
 import PorductsClient from "./_components/clinet";
 import { ProductColumn } from "./_components/columns";
 
-const ProductsPage = async ({ params }: { params: { productId: string } }) => {
+const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
   const product = await prisma.product.findMany({
-    where: { storeId: params.productId },
+    where: { storeId: params.storeId },
     include: {
       store: true,
       category: true,

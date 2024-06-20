@@ -2,9 +2,9 @@ import prisma from "@/prisma/client";
 import BillboardsClient from "./_components/clinet";
 import { SizeColumn } from "./_components/columns";
 
-const SizesPage = async ({ params }: { params: { sizeId: string } }) => {
+const SizesPage = async ({ params }: { params: { storeId: string } }) => {
   const size = await prisma.size.findMany({
-    where: { storeId: params.sizeId },
+    where: { storeId: params.storeId },
     orderBy: {
       createdAt: "desc",
     },
