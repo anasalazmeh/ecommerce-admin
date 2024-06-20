@@ -7,6 +7,7 @@ import { useEffect } from "react";
 const SetupPage=()=>{
   const onOpen=useStoreModal(set=>set.onOpen)
   const isOpne=useStoreModal(set=>set.isOpen)
+  
   useEffect(()=>{
     if(!isOpne)
     onOpen()

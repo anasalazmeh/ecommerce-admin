@@ -2,6 +2,7 @@ import React from "react";
 import ApiAlert from "./api-alert";
 import { useParams } from "next/navigation";
 import { useOrigin } from "@/hooks/use-origin";
+
 interface ApiListProps {
   entityName: string;
   entityIdName: string;

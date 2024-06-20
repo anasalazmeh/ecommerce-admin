@@ -8,10 +8,9 @@ export async function GET(
   try {
     // const { userId } = auth();
     // if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
-
     if (!params.storeId)
       return NextResponse.json("Store id is required", { status: 400 });
-
+    
     const store = await prisma.store.findFirst({
       where: { id: params.storeId },
     });
